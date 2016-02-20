@@ -31,4 +31,21 @@ public class TestShapeClassifier {
         assertEquals(YES, result);
     }
 
+    @Test
+    public void testFlipLine23() {
+		result = shapeClassifier.evaluateGuess(",Large,Yes,100,20,100,20");
+        assertEquals(NO, result);
+    }
+
+    @Test
+    public void testFlipLine26() {
+		result = shapeClassifier.evaluateGuess("Rectangle,,Yes,100,20,100,20");
+        assertEquals(NO, result);
+    }
+
+    @Test
+    public void testFlipLine29() {
+		result = shapeClassifier.evaluateGuess("Rectangle,Large,,100,20,100,20");
+        assertEquals(NO, result);
+    }
 }
