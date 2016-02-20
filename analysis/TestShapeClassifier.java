@@ -12,6 +12,9 @@ public class TestShapeClassifier {
 	private ShapeClassifier shapeClassifier; 
 	private String result;
 
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+
 	@Before
     public void setUp() {
     	// Spawn a new ShapeClassifier instance
@@ -23,7 +26,6 @@ public class TestShapeClassifier {
     	// Reset ShapeClassifier
         shapeClassifier = null;
     }
-
 
     @Test
     public void testBaselinePath() {
@@ -59,5 +61,20 @@ public class TestShapeClassifier {
     public void testFlipLine88() {
         result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
         assertEquals(NO, result);
+    }
+
+    @Test
+    public void testFlipLine95() {
+        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
+        assertEquals(NO, result);
+    }
+
+    // StackOverflow Reference: http://stackoverflow.com/questions/309396/java-how-to-test-methods-that-call-system-exit
+    @Test
+    public void testFlipLine102() {
+        for (int i=0; i<3;i++) {
+            result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
+        }
+        exit.expectSystemExitWithStatus(1);
     }
 }
