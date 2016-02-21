@@ -1,12 +1,12 @@
 package analysis;
 
-public class ShapeClassifier {
+public class WhiteBoxShapeClassifier {
 	private int badGuesses; 
 	private String[] threeParamGuesses = {"Equilateral", "Isosceles", "Scalene"};
 	private String[] fourParamGuesses = {"Rectangle", "Square"};
 	private String[] twoParamGuesses = {"Circle", "Ellipse", "Line"};
 
-	public ShapeClassifier() {
+	public WhiteBoxShapeClassifier() {
 		badGuesses = 0;
 	}
 
@@ -20,42 +20,68 @@ public class ShapeClassifier {
 		String evenOddGuess = getEvenOddGuess(arg);
 		int calcPerim = 0;
 
-		if (shapeGuess == null)
+		if (shapeGuess == null) {
+			System.out.println("Line 23: True");
 			shapeGuess = "";
+		}
+		else {
+			System.out.println("Line 23: False");
+		}
 
-		if (sizeGuess == null)
+		if (sizeGuess == null) {
+			System.out.println("Line 26: True");
 			sizeGuess = "";
+		}
+		else {
+			System.out.println("Line 26: False");
+		}
 
-		if (evenOddGuess == null)
+		if (evenOddGuess == null) {
+			System.out.println("Line 29: True");
 			evenOddGuess = "";
+		}
+		else {
+			System.out.println("Line 29: False");
+		}
 
 
 		switch (parameters.length) {
 		case 1:
+			System.out.println("Line 33: Case 1");
 			if (shapeGuess.equals("Line")) {
+				System.out.println("Line 35: True");
 				shapeGuessResult = shapeGuess;
 				calcPerim = parameters[0];
+			} else {
+				System.out.println("Line 35: False");
 			}
 			break; 
 		case 2: 
+			System.out.println("Line 33: Case 2");
 			shapeGuessResult = classify2Parameters(parameters[1], parameters[1]);
 			if (shapeGuessResult.equals("Ellipse")) {
+				System.out.println("Line 42: True");
 				calcPerim = calculateEllipsePerimeter(parameters[0],parameters[1]);
 			}
 			else {
+				System.out.println("Line 42: False");
 				calcPerim = calculateCirclePerimeter(parameters[0]);
 			}
 			break;
 		case 3:
+			System.out.println("Line 33: Case 3");
 			shapeGuessResult = classify3Parameters(parameters[0], parameters[1],parameters[2]);
 			calcPerim = calculateTrianglePerimeter(parameters[1], parameters[1],parameters[2]);
 			break;
 		case 4:
+			System.out.println("Line 33: Case 4");
 			shapeGuessResult = classify4Parameters(parameters[0], parameters[1],parameters[2], parameters[3]);
 			if (shapeGuessResult.equals("Rectangle")) {
+				System.out.println("Line 55: True");
 				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[3],parameters[2], parameters[3]);
 			}
 			else {
+				System.out.println("Line 55: False");
 				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[1],parameters[2], parameters[3]);
 			}
 		}
@@ -65,44 +91,64 @@ public class ShapeClassifier {
 		Boolean isEvenOddCorrect = null;
 
 		// check the shape guess
-		if (shapeGuessResult.equals(shapeGuess))
+		if (shapeGuessResult.equals(shapeGuess)) {
+			System.out.println("Line 68: True");
 			isShapeGuessCorrect = true;
-		else 
+		}
+		else {
+			System.out.println("Line 68: False");
 			isShapeGuessCorrect = false;
+		}
 
 		// check the size guess
 
 		if (calcPerim > 200 && sizeGuess.equals("Large")) {
+			System.out.println("Line 75: True");
 			isSizeGuessCorrect = true;
 		}
-		else if (calcPerim < 10 && sizeGuess.equals("Small")) {
-			isSizeGuessCorrect = true;	
-		}
-		else { 
-			isSizeGuessCorrect = false;
+		else {
+			System.out.println("Line 75: False");
+			if (calcPerim < 10 && sizeGuess.equals("Small")) {
+				System.out.println("Line 78: True");
+				isSizeGuessCorrect = true;	
+			}
+			else { 
+				System.out.println("Line 78: False");
+				isSizeGuessCorrect = false;
+			}
 		}
 
 		if ( 0 == (calcPerim % 2) && evenOddGuess.equals("Yes")) {
-			isEvenOddCorrect = true;
-		}
-		else if ( 0 != (calcPerim % 2) && evenOddGuess.equals("No")) {
+			System.out.println("Line 85: True");
 			isEvenOddCorrect = true;
 		}
 		else { 
-			isEvenOddCorrect = false;
+			System.out.println("Line 85: False");
+			if ( 0 != (calcPerim % 2) && evenOddGuess.equals("No")) {
+				System.out.println("Line 88: True");
+				isEvenOddCorrect = true;
+			}
+			else { 
+				System.out.println("Line 88: False");
+				isEvenOddCorrect = false;
+			}
 		}
-
+		
 		if (isShapeGuessCorrect && isSizeGuessCorrect && isEvenOddCorrect) {
+			System.out.println("Line 95: True");
 			badGuesses=0;
 			return "Yes";
 		}
 		else {
+			System.out.println("Line 95: False");
 			// too many bad guesses
 			badGuesses++;
 			if (badGuesses >= 3) {
-				System.out.println("Bad guess limit Exceeded");
+				System.out.println("Line 102: True");
+//				System.out.println("Bad guess limit Exceeded");
 				System.exit(1);
 			}
+			System.out.println("Line 102: False");
 			return "No";
 		}
 	}
@@ -110,11 +156,6 @@ public class ShapeClassifier {
 	// P = 2 * PI *r
 	private int calculateCirclePerimeter(int r) {
 		return (int) (2 * Math.PI * r);
-	}
-
-	// P = 4 * s
-	private int calculateSquarePerimeter(int side) {
-		return 4 * side;
 	}
 
 	// P = 2l + 2w)
@@ -223,5 +264,15 @@ public class ShapeClassifier {
 		}
 		return "";
 	}
+	
+	private static void testEvaluateGuess(String input) {
+    	WhiteBoxShapeClassifier shapeClassifier = new WhiteBoxShapeClassifier(); 
+		shapeClassifier.evaluateGuess("Rectangle,Large,Yes,200,100,200,100");
+	}
+
+	public static void main(String[] args) {
+		testEvaluateGuess(",Large,Yes,100,20,100,20");
+	}
+	
 }
 
