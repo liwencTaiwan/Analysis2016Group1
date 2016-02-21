@@ -12,7 +12,7 @@ public class ShapeClassifierTest {
 	
 	private static void testEvaluateGuess(String expectedResult, String input) {
     	ShapeClassifier shapeClassifier = new ShapeClassifier(); 
-		String result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,200,100,200,100");
+		String result = shapeClassifier.evaluateGuess(input);
         assertEquals(expectedResult, result);
 	}
 	
