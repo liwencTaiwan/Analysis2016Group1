@@ -267,11 +267,11 @@ public class WhiteBoxShapeClassifier {
 	
 	private static void testEvaluateGuess(String input) {
     	WhiteBoxShapeClassifier shapeClassifier = new WhiteBoxShapeClassifier(); 
-		shapeClassifier.evaluateGuess("Rectangle,Large,Yes,200,100,200,100");
+		shapeClassifier.evaluateGuess(input);
 	}
 
 	public static void main(String[] args) {
-		testEvaluateGuess(",Large,Yes,100,20,100,20");
+		testEvaluateGuess("Line,Large,Yes,300");
 	}
 	
 }
