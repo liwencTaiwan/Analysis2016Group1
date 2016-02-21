@@ -82,6 +82,8 @@ public class ShapeClassifier {
 			isSizeGuessCorrect = false;
 		}
 
+		/***********************************************************/
+		
 		if ( 0 == (calcPerim % 2) && evenOddGuess.equals("Yes")) {
 			isEvenOddCorrect = true;
 		}
@@ -223,10 +225,5 @@ public class ShapeClassifier {
 		}
 		return "";
 	}
-
-	public static void main(String[] args) {
-		ShapeClassifier shapeClassifier = new ShapeClassifier(); 
-
-		System.out.println(shapeClassifier.evaluateGuess("Equilateral,Small,Yes,100,100,100"));
-	}
 }
+
