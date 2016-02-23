@@ -78,7 +78,8 @@ public class WhiteBoxShapeClassifier {
 			shapeGuessResult = classify4Parameters(parameters[0], parameters[1],parameters[2], parameters[3]);
 			if (shapeGuessResult.equals("Rectangle")) {
 				System.out.println("Line 55: True");
-				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[3],parameters[2], parameters[3]);
+				// Bug fix: Incorrect order Params being passed into calculateRectanglePerimeter
+				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[2],parameters[1], parameters[3]);
 			}
 			else {
 				System.out.println("Line 55: False");
@@ -122,16 +123,15 @@ public class WhiteBoxShapeClassifier {
 			System.out.println("Line 85: True");
 			isEvenOddCorrect = true;
 		}
+		else if ( 0 != (calcPerim % 2) && evenOddGuess.equals("No")) { 
+			System.out.println("Line 85: False");
+			System.out.println("Line 88: True");
+			isEvenOddCorrect = true;
+		}
 		else { 
 			System.out.println("Line 85: False");
-			if ( 0 != (calcPerim % 2) && evenOddGuess.equals("No")) {
-				System.out.println("Line 88: True");
-				isEvenOddCorrect = true;
-			}
-			else { 
-				System.out.println("Line 88: False");
-				isEvenOddCorrect = false;
-			}
+			System.out.println("Line 88: False");
+			isEvenOddCorrect = false;
 		}
 		
 		if (isShapeGuessCorrect && isSizeGuessCorrect && isEvenOddCorrect) {
@@ -271,7 +271,7 @@ public class WhiteBoxShapeClassifier {
 	}
 
 	public static void main(String[] args) {
-		testEvaluateGuess("Line,Large,Yes,300");
+		testEvaluateGuess("Rectangle,Large,Yes,101,21,101,21");
 	}
 	
 }

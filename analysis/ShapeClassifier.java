@@ -53,7 +53,7 @@ public class ShapeClassifier {
 		case 4:
 			shapeGuessResult = classify4Parameters(parameters[0], parameters[1],parameters[2], parameters[3]);
 			if (shapeGuessResult.equals("Rectangle")) {
-				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[3],parameters[2], parameters[3]);
+				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[2],parameters[1], parameters[3]); // Bug fix: Incorrect order Params being passed into calculateRectanglePerimeter (Test: TestBaselinePath)
 			}
 			else {
 				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[1],parameters[2], parameters[3]);

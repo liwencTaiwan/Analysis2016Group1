@@ -51,7 +51,7 @@ public class TestShapeClassifier {
     @Test
     public void testFlipLine85() {
         result = shapeClassifier.evaluateGuess("Rectangle,Large,No,101,21,101,21");
-        assertEquals(YES, result);
+        assertEquals(NO, result);
     }
 
     @Test
