@@ -1,4 +1,4 @@
-package analysis_G2.analysis;
+package analysis;
 import junit.framework.TestCase;
 import org.junit.*;
 

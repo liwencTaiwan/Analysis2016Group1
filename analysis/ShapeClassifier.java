@@ -72,10 +72,10 @@ public class ShapeClassifier {
 
 		// check the size guess
 
-		if (calcPerim > 200 && sizeGuess.equals("Large")) {
+		if (calcPerim > 100 && sizeGuess.equals("Large")) { // Bugfix: Incorrect perimeter threshold according to assignment
 			isSizeGuessCorrect = true;
 		}
-		else if (calcPerim < 10 && sizeGuess.equals("Small")) {
+		else if (calcPerim <= 100 && sizeGuess.equals("Small")) { // Bugfix: Incorrect perimeter threshold according to assignment
 			isSizeGuessCorrect = true;	
 		}
 		else { 
