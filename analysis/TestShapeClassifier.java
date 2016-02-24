@@ -23,6 +23,7 @@ public class TestShapeClassifier {
     public void tearDown() {
     	// Reset ShapeClassifier
         shapeClassifier = null;
+        System.setSecurityManager(null);
     }
 
     @Test
