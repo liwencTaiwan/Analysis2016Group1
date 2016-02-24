@@ -23,6 +23,7 @@ public class TestShapeClassifier {
     public void tearDown() {
     	// Reset ShapeClassifier
         shapeClassifier = null;
+        System.setSecurityManager(null);
     }
 
     @Test
@@ -95,14 +96,5 @@ public class TestShapeClassifier {
             assertEquals(1, status);
         }
     }
-
-    // StackOverflow Reference: http://stackoverflow.com/questions/309396/java-how-to-test-methods-that-call-system-exit
-    // @Test
-    // public void testFlipLine102() {
-    //    for (int i=0; i<3;i++) {
-    //        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
-    //    }
-        // TODO: Figure out a way to check System Exit in JUnit
-    //}
 }
 
