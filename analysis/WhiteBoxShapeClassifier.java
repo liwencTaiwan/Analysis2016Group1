@@ -271,7 +271,7 @@ public class WhiteBoxShapeClassifier {
 	}
 
 	public static void main(String[] args) {
-		testEvaluateGuess("Ellipse,Large,Yes,00,100");
+		testEvaluateGuess("Circle,Large,Yes,100,100");
 	}
 	
 }

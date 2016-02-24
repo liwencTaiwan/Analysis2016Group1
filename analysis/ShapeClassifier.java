@@ -38,7 +38,7 @@ public class ShapeClassifier {
 			}
 			break; 
 		case 2: 
-			shapeGuessResult = classify2Parameters(parameters[0], parameters[1]); // Bug fix: Passed same parameter twice rather than two parameters.
+			shapeGuessResult = classify2Parameters(parameters[0], parameters[1]); // Bug fix: Passed same parameter twice rather than two parameters (Test: TestFlip2ParamConditional)
 			if (shapeGuessResult.equals("Ellipse")) {
 				calcPerim = calculateEllipsePerimeter(parameters[0],parameters[1]);
 			}
@@ -53,7 +53,7 @@ public class ShapeClassifier {
 		case 4:
 			shapeGuessResult = classify4Parameters(parameters[0], parameters[1],parameters[2], parameters[3]);
 			if (shapeGuessResult.equals("Rectangle")) {
-				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[2],parameters[1], parameters[3]); // Bug fix: Incorrect order Params being passed into calculateRectanglePerimeter (Test: TestBaselinePath)
+				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[2],parameters[1], parameters[3]); // Bug fix: Incorrect order Params being passed into calculateRectanglePerimeter (Test: TestFlipCase4Conditional)
 			}
 			else {
 				calcPerim = calculateRectanglePerimeter(parameters[0], parameters[1],parameters[2], parameters[3]);
@@ -194,7 +194,7 @@ public class ShapeClassifier {
 	// Classify four sides
 	private String classify4Parameters(int a, int b, int c, int d) {
 		if (a == b && c == d) {
-			if (a != c) {
+			if (a == c) { // Bug Fix: Square is the equality rather than inequality case (Test Case: TestFlipCase4Conditional)
 				return fourParamGuesses[1];
 			}
 			else 
