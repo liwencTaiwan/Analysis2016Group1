@@ -58,7 +58,7 @@ public class WhiteBoxShapeClassifier {
 			break; 
 		case 2: 
 			System.out.println("Line 33: Case 2");
-			shapeGuessResult = classify2Parameters(parameters[1], parameters[1]);
+			shapeGuessResult = classify2Parameters(parameters[0], parameters[1]);
 			if (shapeGuessResult.equals("Ellipse")) {
 				System.out.println("Line 42: True");
 				calcPerim = calculateEllipsePerimeter(parameters[0],parameters[1]);
