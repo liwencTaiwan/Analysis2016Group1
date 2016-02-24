@@ -26,44 +26,66 @@ public class TestShapeClassifier {
 
     @Test
     public void testBaselinePath() {
-		result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,20,100,20");
+		result = shapeClassifier.evaluateGuess("Circle,Large,Yes,100,100");
         assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine23() {
-		result = shapeClassifier.evaluateGuess(",Large,Yes,100,20,100,20");
+        // Infeasible Path
+		result = shapeClassifier.evaluateGuess(",Large,Yes,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine26() {
-		result = shapeClassifier.evaluateGuess("Rectangle,,Yes,100,20,100,20");
+        // Infeasible Path
+		result = shapeClassifier.evaluateGuess("Circle,,Yes,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine29() {
-		result = shapeClassifier.evaluateGuess("Rectangle,Large,,100,20,100,20");
+        // Infeasible Path
+		result = shapeClassifier.evaluateGuess("Circle,Large,,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine85() {
-        result = shapeClassifier.evaluateGuess("Rectangle,Large,No,101,21,101,21");
-        assertEquals(NO, result);
+        result = shapeClassifier.evaluateGuess("Circle,Large,No,113,113");
+        assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine88() {
-        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
+        result = shapeClassifier.evaluateGuess("Circle,Large,No,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine95() {
-        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
+        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,100");
         assertEquals(NO, result);
+    }
+
+    @Test
+    public void testFlipLine95and102() {
+        try {
+            for (int i=0; i<4; i++) {
+                result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,100");
+            }
+        } catch (Exception e) {
+            if (e instanceof AttemptToExitException){
+                int statusCode = ((AttemptToExitException) e).getStatus();
+                assertEquals(1, statusCode);
+                System.out.println("TEST Passed!");
+            }
+            else {
+                System.out.println("TEST FAILED!");
+            }
+        }
+        System.out.println("TEST Finished!");
     }
 
     // StackOverflow Reference: http://stackoverflow.com/questions/309396/java-how-to-test-methods-that-call-system-exit
