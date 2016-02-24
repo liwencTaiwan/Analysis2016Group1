@@ -1,6 +1,9 @@
-package analysis;
+package analysis_G2.analysis;
 import junit.framework.TestCase;
 import org.junit.*;
+
+import analysis.ShapeClassifier;
+
 import java.util.*;
 import static org.junit.Assert.*;
 
@@ -66,6 +69,13 @@ public class TestShapeClassifier {
     public void testFlipLine75() {
 		result = shapeClassifier.evaluateGuess("Circle,Large,Yes,10,10");
         assertEquals(NO, result);
+    }
+    
+    @Test
+    public void testFlipLine78() {
+        // Infeasible Path
+		result = shapeClassifier.evaluateGuess("Circle,Small,Yes,1,1");
+        assertEquals(YES, result);
     }
 
     @Test
