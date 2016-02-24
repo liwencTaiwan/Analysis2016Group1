@@ -16,6 +16,7 @@ public class TestShapeClassifier {
     public void setUp() {
     	// Spawn a new ShapeClassifier instance
         shapeClassifier = new ShapeClassifier();
+        System.setSecurityManager(new ExitDeniedSecurityManager());
     }
 
     @After
@@ -75,17 +76,24 @@ public class TestShapeClassifier {
             for (int i=0; i<4; i++) {
                 result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,100");
             }
-        } catch (Exception e) {
-            if (e instanceof AttemptToExitException){
-                int statusCode = ((AttemptToExitException) e).getStatus();
-                assertEquals(1, statusCode);
-                System.out.println("TEST Passed!");
-            }
-            else {
-                System.out.println("TEST FAILED!");
-            }
+            Assert.fail("Exit was expected");
+        } catch (ExitDeniedSecurityManager.ExitSecurityException e) {
+            int status = e.getStatus();
+            assertEquals(1, status);
         }
-        System.out.println("TEST Finished!");
+    }
+
+    @Test
+    public void testFlipLine88and102() {
+        try {
+            for (int i=0; i<4; i++) {
+                result = shapeClassifier.evaluateGuess("Circle,Large,No,100,100");
+            }
+            Assert.fail("Exit was expected");
+        } catch (ExitDeniedSecurityManager.ExitSecurityException e) {
+            int status = e.getStatus();
+            assertEquals(1, status);
+        }
     }
 
     // StackOverflow Reference: http://stackoverflow.com/questions/309396/java-how-to-test-methods-that-call-system-exit
@@ -97,3 +105,4 @@ public class TestShapeClassifier {
         // TODO: Figure out a way to check System Exit in JUnit
     //}
 }
+
