@@ -193,10 +193,6 @@ public class ShapeClassifier {
 
 	// Classify four sides
 	private String classify4Parameters(int a, int b, int c, int d) {
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(c);
-		System.out.println(d);
 		if (a == b && c == d) {
 			if (a == c) {  // Bug fix: Flip55 test case
 				return fourParamGuesses[1];
