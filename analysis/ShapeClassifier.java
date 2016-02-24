@@ -4,7 +4,7 @@ public class ShapeClassifier {
 	private int badGuesses; 
 	private String[] threeParamGuesses = {"Equilateral", "Isosceles", "Scalene"};
 	private String[] fourParamGuesses = {"Rectangle", "Square"};
-	private String[] twoParamGuesses = {"Circle", "Ellipse", "Line"};
+	private String[] twoParamGuesses = {"Circle", "Ellipse"}; // Bugfix: Removed Line from here
 
 	public ShapeClassifier() {
 		badGuesses = 0;
@@ -48,7 +48,7 @@ public class ShapeClassifier {
 			break;
 		case 3:
 			shapeGuessResult = classify3Parameters(parameters[0], parameters[1],parameters[2]);
-			calcPerim = calculateTrianglePerimeter(parameters[1], parameters[1],parameters[2]);
+			calcPerim = calculateTrianglePerimeter(parameters[0], parameters[1],parameters[2]); // Bugfix: Incorrect params being passed into triangle
 			break;
 		case 4:
 			shapeGuessResult = classify4Parameters(parameters[0], parameters[1],parameters[2], parameters[3]);
@@ -198,7 +198,7 @@ public class ShapeClassifier {
 		System.out.println(c);
 		System.out.println(d);
 		if (a == b && c == d) {
-			if (a == c) {
+			if (a == c) {  // Bug fix: Flip55 test case
 				return fourParamGuesses[1];
 			}
 			else 
