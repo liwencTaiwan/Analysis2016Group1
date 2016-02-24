@@ -36,6 +36,24 @@ public class TestShapeClassifier {
     }
 
     @Test
+    public void testFlipLine23() {
+        result = shapeClassifier.evaluateGuess(",Large,Yes,100,100");
+        assertEquals(NO, result);
+    }
+
+    @Test
+    public void testFlipLine26() {
+        result = shapeClassifier.evaluateGuess("Circle,,Yes,100,100");
+        assertEquals(NO, result);
+    }
+
+    @Test
+    public void testFlipLine29() {
+        result = shapeClassifier.evaluateGuess("Circle,Large,,100,100");
+        assertEquals(NO, result);
+    }
+
+    @Test
     public void testFlipLine33Case1() {
 		result = shapeClassifier.evaluateGuess("Line,Large,Yes,300");
         assertEquals(YES, result);
@@ -118,19 +136,6 @@ public class TestShapeClassifier {
         try {
             for (int i=0; i<4; i++) {
                 result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,100");
-            }
-            Assert.fail("Exit was expected");
-        } catch (ExitDeniedSecurityManager.ExitSecurityException e) {
-            int status = e.getStatus();
-            assertEquals(1, status);
-        }
-    }
-
-    @Test
-    public void testFlipLine88and102() {
-        try {
-            for (int i=0; i<4; i++) {
-                result = shapeClassifier.evaluateGuess("Circle,Large,No,100,100");
             }
             Assert.fail("Exit was expected");
         } catch (ExitDeniedSecurityManager.ExitSecurityException e) {
