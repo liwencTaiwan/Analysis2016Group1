@@ -75,7 +75,9 @@ public class WhiteBoxShapeClassifier {
 			break;
 		case 4:
 			System.out.println("Line 33: Case 4");
+			System.out.println(shapeGuess);
 			shapeGuessResult = classify4Parameters(parameters[0], parameters[1],parameters[2], parameters[3]);
+			System.out.println(shapeGuessResult);
 			if (shapeGuessResult.equals("Rectangle")) {
 				System.out.println("Line 55: True");
 				// Bug fix: Incorrect order Params being passed into calculateRectanglePerimeter
@@ -235,7 +237,7 @@ public class WhiteBoxShapeClassifier {
 	// Classify four sides
 	private String classify4Parameters(int a, int b, int c, int d) {
 		if (a == b && c == d) {
-			if (a != c) {
+			if (a == c) {
 				return fourParamGuesses[1];
 			}
 			else 
@@ -272,9 +274,7 @@ public class WhiteBoxShapeClassifier {
 
 	public static void main(String[] args) {
 		System.out.println("FlipLine85");
-		for (int i=0; i<4; i++){
-			testEvaluateGuess("Rectangle,Large,Yes,100,100");
-		}
+		testEvaluateGuess("Square,Large,Yes,100,100,100,100");
 	}
 	
 }

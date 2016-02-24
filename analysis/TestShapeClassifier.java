@@ -34,67 +34,52 @@ public class TestShapeClassifier {
 
     @Test
     public void testFlipLine33Case1() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess("Line,Large,Yes,300");
-        assertEquals(NO, result);
+        assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine33Case3() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess("Equilateral,Large,Yes,300,300,300");
-        assertEquals(NO, result);
+        assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine33Case4() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,200,100,100,200");
-        assertEquals(NO, result);
+        assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine42() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess("Ellipse,Large,Yes,201,100");
-        assertEquals(NO, result);
+        assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine68() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess("Circl,Large,Yes,102,102");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine75() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess("Circle,Large,Yes,10,10");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine35() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess(",Large,Yes,300");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine55() {
-        // Infeasible Path
 		result = shapeClassifier.evaluateGuess("Square,Large,Yes,100,100,100,100");
-        assertEquals(NO, result);
+        assertEquals(YES, result);
     }
 
-    @Test
-    public void testFlipLine29() {
-        // Infeasible Path
-		result = shapeClassifier.evaluateGuess("Circle,Large,,100,100");
-        assertEquals(NO, result);
-    }
-    
     @Test
     public void testFlipLine85() {
         result = shapeClassifier.evaluateGuess("Circle,Large,No,113,113");
@@ -112,7 +97,7 @@ public class TestShapeClassifier {
         result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,100");
         assertEquals(NO, result);
     }
-
+    
     @Test
     public void testFlipLine95and102() {
         try {
@@ -138,5 +123,6 @@ public class TestShapeClassifier {
             assertEquals(1, status);
         }
     }
+    
 }
 
