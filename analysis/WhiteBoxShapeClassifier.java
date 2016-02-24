@@ -271,7 +271,10 @@ public class WhiteBoxShapeClassifier {
 	}
 
 	public static void main(String[] args) {
-		testEvaluateGuess("Circle,Large,Yes,100,100");
+		System.out.println("FlipLine85");
+		for (int i=0; i<4; i++){
+			testEvaluateGuess("Rectangle,Large,Yes,100,100");
+		}
 	}
 	
 }

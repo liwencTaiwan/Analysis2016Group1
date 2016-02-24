@@ -16,6 +16,7 @@ public class TestShapeClassifier {
     public void setUp() {
     	// Spawn a new ShapeClassifier instance
         shapeClassifier = new ShapeClassifier();
+        System.setSecurityManager(new ExitDeniedSecurityManager());
     }
 
     @After
@@ -26,44 +27,73 @@ public class TestShapeClassifier {
 
     @Test
     public void testBaselinePath() {
-		result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,20,100,20");
+		result = shapeClassifier.evaluateGuess("Circle,Large,Yes,100,100");
         assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine23() {
-		result = shapeClassifier.evaluateGuess(",Large,Yes,100,20,100,20");
+        // Infeasible Path
+		result = shapeClassifier.evaluateGuess(",Large,Yes,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine26() {
-		result = shapeClassifier.evaluateGuess("Rectangle,,Yes,100,20,100,20");
+        // Infeasible Path
+		result = shapeClassifier.evaluateGuess("Circle,,Yes,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine29() {
-		result = shapeClassifier.evaluateGuess("Rectangle,Large,,100,20,100,20");
+        // Infeasible Path
+		result = shapeClassifier.evaluateGuess("Circle,Large,,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine85() {
-        result = shapeClassifier.evaluateGuess("Rectangle,Large,No,101,21,101,21");
-        assertEquals(NO, result);
+        result = shapeClassifier.evaluateGuess("Circle,Large,No,113,113");
+        assertEquals(YES, result);
     }
 
     @Test
     public void testFlipLine88() {
-        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
+        result = shapeClassifier.evaluateGuess("Circle,Large,No,100,100");
         assertEquals(NO, result);
     }
 
     @Test
     public void testFlipLine95() {
-        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,101,21,101,21");
+        result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,100");
         assertEquals(NO, result);
+    }
+
+    @Test
+    public void testFlipLine95and102() {
+        try {
+            for (int i=0; i<4; i++) {
+                result = shapeClassifier.evaluateGuess("Rectangle,Large,Yes,100,100");
+            }
+            Assert.fail("Exit was expected");
+        } catch (ExitDeniedSecurityManager.ExitSecurityException e) {
+            int status = e.getStatus();
+            assertEquals(1, status);
+        }
+    }
+
+    @Test
+    public void testFlipLine88and102() {
+        try {
+            for (int i=0; i<4; i++) {
+                result = shapeClassifier.evaluateGuess("Circle,Large,No,100,100");
+            }
+            Assert.fail("Exit was expected");
+        } catch (ExitDeniedSecurityManager.ExitSecurityException e) {
+            int status = e.getStatus();
+            assertEquals(1, status);
+        }
     }
 
     // StackOverflow Reference: http://stackoverflow.com/questions/309396/java-how-to-test-methods-that-call-system-exit
@@ -75,3 +105,4 @@ public class TestShapeClassifier {
         // TODO: Figure out a way to check System Exit in JUnit
     //}
 }
+
