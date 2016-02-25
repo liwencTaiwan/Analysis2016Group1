@@ -97,7 +97,7 @@ public class TestShapeClassifier {
     
     @Test
     public void testFlipLine78() {
-		result = shapeClassifier.evaluateGuess("Circle,Small,Yes,1,1");
+		result = shapeClassifier.evaluateGuess("Circle,Small,Yes,2,2");
         assertEquals(YES, result);
     }
 
