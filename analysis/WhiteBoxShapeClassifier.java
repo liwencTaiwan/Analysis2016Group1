@@ -273,8 +273,12 @@ public class WhiteBoxShapeClassifier {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("FlipLine85");
-		testEvaluateGuess("Square,Large,Yes,100,100,100,100");
+		System.out.println("testFlipLine23");
+		testEvaluateGuess(",Large,Yes,100");
+		System.out.println("testFlipLine26");
+		testEvaluateGuess("Circle,,Yes,100");
+		System.out.println("testFlipLine29");
+		testEvaluateGuess("Circle,Large,,100");
 	}
 	
 }

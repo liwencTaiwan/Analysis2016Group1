@@ -61,7 +61,7 @@ public class TestShapeClassifier {
 
     @Test
     public void testFlipLine33Case3() {
-		result = shapeClassifier.evaluateGuess("Equilateral,Large,Yes,300,300,300");
+		result = shapeClassifier.evaluateGuess("Isosceles,Large,Yes,300,300,100");
         assertEquals(YES, result);
     }
 
